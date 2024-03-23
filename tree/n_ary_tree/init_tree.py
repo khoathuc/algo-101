@@ -29,5 +29,11 @@ def printOut():
         print(node.__repr__() + '\n')
 
 
+def test():
+    root_1 = input_nodes[0]
+    child_1 = root_1.getNodes()[0]
+    root_2 = input_nodes[1]
+
 readFlat()
-printOut()
+# printOut()
+test()

@@ -24,6 +24,12 @@ class Node:
         if(isinstance(node, Node)):
             self.__nodes.append(node)
     
+    def parent(self, node)->None:
+        """Set parent node"""
+        if(isinstance(node, Node)):
+            self.__parent = node
+
+
     def getNodes(self):
         """get nodes
 
