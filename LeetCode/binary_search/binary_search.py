@@ -63,3 +63,42 @@ class BinarySearch():
 
         return end if l > end else l
     
+
+    @staticmethod
+    def findFirst(arr: List[int],l: int, r: int, target: int) -> int:
+        if l > r:
+            if(l <= len(arr) - 1) and (arr[l] == target):
+                return l
+            else: 
+                return -1
+        
+        mid = l + (r-l)//2
+        if(arr[mid] >= target):
+            r = mid - 1
+            return BinarySearch.findFirst(arr, l, r, target)
+        
+        elif arr[mid] < target:
+            l = mid + 1
+            return BinarySearch.findFirst(arr, l, r, target)
+        
+
+    
+
+    @staticmethod
+    def findLast(arr: List[int], l: int, r: int,  target: int) -> int:
+        if l > r:
+            if(r >= 0) and (arr[r] == target):
+                return r
+            else: 
+                return -1
+        
+        mid = l + (r-l)//2
+        if(arr[mid] > target):
+            r = mid - 1
+            return BinarySearch.findLast(arr, l, r, target)
+        
+        elif arr[mid] <= target:
+            l = mid + 1
+            return BinarySearch.findLast(arr, l, r, target)
+    
+
