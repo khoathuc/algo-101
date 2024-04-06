@@ -5,7 +5,7 @@ from typing import List
 import sys
 sys.path.append('..')
 #pylint: disable=wrong-import-position
-from binary_search import BinarySearch
+from binary_search_tree import BinarySearch
 #pylint: enable=wrong-import-position
 # pylint: disable=E1101
 
@@ -28,12 +28,18 @@ class Reader():
 
 class Solution():
     def search(self, nums: List[int], target: int) -> int:
-        start, end = 0, len(nums) - 1
+        
+        # find pivot
+        pivot = BinarySearch.pivotSearch(nums)
 
-        first_index =  BinarySearch.findFirst(nums, start, end,  target)
-        last_index =  BinarySearch.findLast(nums, start, end, target)
-
-        return [first_index, last_index]
+        print(pivot)
+        
+        if(target >= nums[pivot]) and (target <= nums[len(nums) - 1]):
+            return BinarySearch.binarySearch(nums, pivot, len(nums) - 1, target)
+        elif (target >= nums[0]) and (target <= nums[pivot - 1]):
+            return BinarySearch.binarySearch(nums, 0, pivot - 1, target)
+        else:
+            return -1
 
 
 def app():

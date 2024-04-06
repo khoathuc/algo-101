@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./LeetCode/binary_tree/adt",
+        "./LeetCode/binary_tree"
+    ]
+}

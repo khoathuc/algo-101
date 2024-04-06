@@ -80,9 +80,6 @@ class BinarySearch():
         elif arr[mid] < target:
             l = mid + 1
             return BinarySearch.findFirst(arr, l, r, target)
-        
-
-    
 
     @staticmethod
     def findLast(arr: List[int], l: int, r: int,  target: int) -> int:
@@ -102,3 +99,59 @@ class BinarySearch():
             return BinarySearch.findLast(arr, l, r, target)
     
 
+    @staticmethod
+    def matrixSearch(matrix: List[List[int]], target: int) -> int:
+        start, end = 0, len(matrix) - 1
+
+
+        def findIndexRange(matrix: List[List[int]], target: int) -> int:
+            l, r = start, end
+            while (l <= r):
+                mid = l + (r - l)//2
+
+                row_mid = matrix[mid]
+
+                min_row_mid = row_mid[0]
+                max_row_mid = row_mid[-1]
+
+                if (target >= min_row_mid) and (target <= max_row_mid):
+                    return mid
+                
+                if(target < min_row_mid):
+                    r = mid - 1
+
+                else:
+                    l = mid + 1
+            
+            return l
+        
+        index_range = findIndexRange(matrix, target)
+        if (index_range < 0) or (index_range > end):
+            return False
+        
+        row_contain = matrix[index_range]
+        print(row_contain)
+        print(BinarySearch.binarySearch(row_contain, 0, len(row_contain) - 1, target))
+        return True if BinarySearch.binarySearch(row_contain, 0, len(row_contain) - 1, target) != -1 else False
+    
+    @staticmethod
+    def matrixSearch2(matrix: List[List[int]], target):
+        m = len(matrix)
+        n = len(matrix[0])
+
+        l,r = 0, m*n -1
+
+        while(l <= r):
+            mid = l + (r - l) // 2
+            row, col = divmod(mid, n)
+
+            if(matrix[row][col] == target):
+                return (row, col)
+            
+            if(matrix[row][col] < target):
+                l = mid + 1
+            else:
+                r = mid - 1
+        
+        if(l >= m*n) or (r < 0):
+            return -1

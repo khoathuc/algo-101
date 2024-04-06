@@ -1,11 +1,11 @@
-# https://leetcode.com/problems/search-insert-position
+# https://leetcode.com/problems/search-in-rotated-sorted-array
 
 from typing import List
 
 import sys
 sys.path.append('..')
 #pylint: disable=wrong-import-position
-from binary_search import BinarySearch
+from binary_search_tree import BinarySearch
 #pylint: enable=wrong-import-position
 # pylint: disable=E1101
 
@@ -27,16 +27,20 @@ class Reader():
             target = f.readline()
 
 class Solution():
-    def searchInsert(self, nums: List[int], target: int) -> int:
-        index = BinarySearch.binarySearch(nums, 0, len(nums) - 1, target)
+    def search(self, nums: List[int], target: int) -> int:
+        start, end = 0, len(nums) - 1
 
-        print(index)
+        first_index =  BinarySearch.findFirst(nums, start, end,  target)
+        last_index =  BinarySearch.findLast(nums, start, end, target)
+
+        return [first_index, last_index]
 
 
 def app():
     Reader().read()
     
     solution = Solution()
-    solution.searchInsert(nums, int(target))
+    res = solution.search(nums, int(target))
+    print(res)
 
 app()
