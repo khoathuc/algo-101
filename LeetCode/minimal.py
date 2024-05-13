@@ -8,8 +8,8 @@ from typing import List
 
 
 """Define global variables"""
-var_1: List[int] = []
-var_2: int = 0
+word1: str
+word2: str
 
 """Reader class"""
 class Reader():
@@ -17,16 +17,12 @@ class Reader():
     @staticmethod
     def read():
         """read input"""
-        global var_1
-        global var_2
+        global word1, word2
 
         with open('input.txt', 'r') as f:
-            nums_data = f.readline()
-
             """Set variables"""
-            var_1 = [int(num_str) for num_str in nums_data.split()]
-
-            var_2 = f.readline()
+            word1 = f.readline()
+            word2 = f.readline()
 
 
 class Solution():
@@ -34,16 +30,18 @@ class Solution():
     Class Solution
     We'll solve problems here
     """
-    def solve(self):
+    def solve(self, word1:str, word2:str):
         #solve here
+        print(word1, word2)
         pass
 
 
 def app():
+    global word1, word2
     """Function read input, solve and output"""
     Reader().read()
     
     solution = Solution()
-    solution.solve()
+    solution.solve(word1, word2)
 
 app()
