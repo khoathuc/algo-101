@@ -21,8 +21,8 @@ class Reader():
 
         with open('input.txt', 'r') as f:
             """Set variables"""
-            word1 = f.readline()
-            word2 = f.readline()
+            word1 = f.readline().strip()
+            word2 = f.readline().strip()
 
 
 class Solution():
@@ -34,13 +34,18 @@ class Solution():
         #solve here
         dist: List[int][int] = [[0] * (len(word2) + 1) for i in range(len(word1) + 1)]
 
+        if len(word1) == 0:
+            return len(word2)
+        if len(word2) == 0:
+            return len(word1)
+        
         # set value for base cases
         for i in range (len(word1)):
             dist[i][len(word2)] = i
 
         for i in range (len(word2)):
             dist[len(word1)][i] = i
-
+        
         # dynamic 
         for i in range(len(word1) - 1, -1, -1):
             for j in range(len(word2) - 1, -1, -1):
@@ -53,6 +58,7 @@ class Solution():
                         dist[i + 1][j + 1] + 1
                     )
         
+        print(dist)
         return dist[0][0]
 
 
@@ -62,6 +68,6 @@ def app():
     Reader().read()
     
     solution = Solution()
-    solution.solve(word1, word2)
+    print(solution.solve(word1, word2))
 
 app()
