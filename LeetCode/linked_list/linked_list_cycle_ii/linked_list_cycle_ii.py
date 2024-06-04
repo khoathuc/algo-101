@@ -8,7 +8,7 @@ import sys
 
 sys.path.append("..")
 from reader import LinkedListReader
-from typing import Optional
+from typing import Dict, Optional
 from ll import ListNode, Node
 
 """Define global variables"""
@@ -43,16 +43,20 @@ class Solution:
 
     def solve(self, head: Optional[Node]):
         # solve here
-        # We use Floyd's algorithm
-        fast_ptr = head
-        slow_ptr = head
-        while(fast_ptr and fast_ptr.next):
-            fast_ptr = fast_ptr.next.next
-            slow_ptr = slow_ptr.next
-            if(fast_ptr == slow_ptr):
-                return True
-            
-        return False
+        # We use a map visited to track if the node is visited
+        # When the node is visited 2 time, that is the node tail connect to
+        visited: Dict[Node, bool] = dict()
+        temp = head
+
+        while(temp):
+            if(temp in visited):
+                return temp
+            else:
+                visited[temp] = True
+                temp = temp.next
+        
+        return None
+        
 
 def app():
     """Function read input, solve and output"""
