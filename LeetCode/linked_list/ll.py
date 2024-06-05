@@ -1,9 +1,9 @@
 from typing import Any, Optional
 class Node: 
     """Node class"""
-    def __init__(self, x: Optional[Any] = None):
+    def __init__(self, x: Optional[Any] = None, next = None):
         self.val = x
-        self.next: Optional[Node] = None
+        self.next: Optional[Node] = next
     
 
 class ListNode:

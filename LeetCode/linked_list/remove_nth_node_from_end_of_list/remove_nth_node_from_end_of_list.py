@@ -39,27 +39,31 @@ class Solution:
 
     def solve(self, head: Optional[Node], n:int):
         # solve here
-        tmp = head
+        if head is None:
+            return head
+        
+        # add new node to head of the list to prevent None case of pre_pointer
+        node = Node(0, head)
+        # maintain 2 pointers that delay n steps
+        pre_ptr = node
+        after_ptr = node
+
+        # make pre_ptr is delayed n+1 steps
         pos = 0
-
-        if(n == pos):
-            return head.next
-        else:
-            while(tmp is not None) and pos != n:
-                pos = pos+1
-                tmp = tmp.next
-            
-            if(tmp is not None):
-                tmp.next = tmp.next.next
+        while(pos < n + 1):
+            if(after_ptr is None):
+                return head
+            after_ptr = after_ptr.next
+            pos += 1
         
-        def print_ll(node: Node):
-            if node is None:
-                return 
-            print(node.val)
-            print_ll(node.next)
-        
-        print_ll(head)
+        # move 2 ptr toward tail of list
+        while(after_ptr):
+            pre_ptr = pre_ptr.next
+            after_ptr = after_ptr.next
 
+        pre_ptr.next = pre_ptr.next.next
+
+        return node.next
 
 
 def app():
