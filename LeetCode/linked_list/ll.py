@@ -1,7 +1,7 @@
 from typing import Any, Optional
 class Node: 
     """Node class"""
-    def __init__(self, x: Any):
+    def __init__(self, x: Optional[Any] = None):
         self.val = x
         self.next: Optional[Node] = None
     

@@ -33,3 +33,13 @@ class LinkedListReader:
         values = cls.values
         for(i, value) in enumerate(values):
             cls.linked_list.insert_at_end(value)
+
+    def build_linked_list_w_values(self, values):
+        linked_list = ListNode()
+        if(values is None):
+            return linked_list
+        
+        for(i, value) in enumerate(values):
+            linked_list.insert_at_end(value)
+
+        return linked_list
