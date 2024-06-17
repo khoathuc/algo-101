@@ -1,11 +1,7 @@
 """Minimal template"""
 
 """Problems links"""
-<<<<<<< HEAD
-# https://leetcode.com/problems/swap-nodes-in-pairs
-=======
 # https://leetcode.com/problems/linked-list-cycle
->>>>>>> 64cdc88d0058542e631b09ff261b6ccf246edb72
 
 """Import required"""
 import sys
@@ -16,11 +12,7 @@ from typing import Dict, Optional
 from ll import ListNode, Node
 
 """Define global variables"""
-<<<<<<< HEAD
-global linkedlist
-=======
 global linked_list
->>>>>>> 64cdc88d0058542e631b09ff261b6ccf246edb72
 """Reader class"""
 
 
@@ -46,23 +38,14 @@ class Solution:
 
     def solve(self, head: Optional[Node]):
         # solve here
-        # create dummy node for swap head
-        super_head = Node(0, head)
-
-        curr = super_head
-        while curr:
-            if (curr.next is None) or (curr.next.next is None):
-                break
-            else:
-                tmp = curr.next
-
-                curr.next = tmp.next
-                tmp.next = curr.next.next
-                curr.next.next = tmp
-
-                curr = curr.next.next
-
-        return super_head.next
+        pre = Node()
+        curr = head
+        while(curr):
+            post = curr.next
+            pre = curr
+            
+            head = head.next
+        
 def app():
     """Function read input, solve and output"""
     global linked_list
