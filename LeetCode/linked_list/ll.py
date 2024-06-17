@@ -4,6 +4,12 @@ class Node:
     def __init__(self, x: Optional[Any] = None, next = None):
         self.val = x
         self.next: Optional[Node] = next
+
+    def print(self):
+        print(self.val)
+        if(self.next):
+            self.next.print()
+        return 
     
 
 class ListNode:

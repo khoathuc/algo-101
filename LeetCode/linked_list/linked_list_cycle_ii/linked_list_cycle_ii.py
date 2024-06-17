@@ -7,7 +7,7 @@
 import sys
 
 sys.path.append("..")
-from reader import LinkedListReader
+from LeetCode.linked_list.s_reader import LinkedListReader
 from typing import Dict, Optional
 from ll import ListNode, Node
 
