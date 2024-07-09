@@ -33,21 +33,18 @@ class Solution():
     #TODO: implement innovative way
     def solve(self, strs: List[str])-> List[List[str]]:
         #solve here
-        groups: Dict[str, List[str]] = {}
-        for str in strs:
-            tmp = ''.join(sorted(str))
-            if( tmp in groups):
-                groups[tmp].append(str)
+        res: Dict[List[int], List[str]] = {}
+       
+        for word in strs:
+            str_list = [0] * 29
+            for i, char in enumerate(word):
+                str_list[ord(char) - ord('a')] += 1
+            if(str_list in res):
+                res[str_list].append(word)
             else:
-                groups[tmp] = [str]
-            
-        #get result
-        res: List[List[str]] = []
-        for key in groups:
-            res.append(groups[key])
-        
-        return res
-            
+                res[str_list] = [word]
+
+        print(res)      
 def app():
     global strs
     """Function read input, solve and output"""

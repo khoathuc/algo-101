@@ -1,7 +1,8 @@
 ## 
 
-res[i]: = True if s[:i + 1] can be created by using word in wordDict
-=> at index i, iterate to end of index.
-=> if index j can be created by using word in wordDict => update index j.
-
-=> continue the loop with closest index that true.
+res[i]: = True if s[:i+1] can be make with word in wordDict.
+if(res[i] == true):
+    for each word in wordDict.
+    => concat res[i] with word (=tmp)
+    if tmp == s[:i+len(word)]:
+    => res[i+len(word)] == True.
