@@ -21,7 +21,7 @@ class Reader():
 
         with open('input.txt', 'r') as f:
             """Set variables"""
-            word = f.readline()
+            word = f.readline().strip()
 
             while True:
                 r = f.readline().strip().split()
@@ -37,18 +37,18 @@ class Solution():
     """
     def solve(self, board:List[List[str]], word: str):
         #solve here
-        #m is number of rows
-        m:int = len(board)
-        #n is number of columns
-        n:int = len(board[0])
+        #r is number of rows
+        r:int = len(board)
+        #c is number of columns
+        c:int = len(board[0])
 
-        def backtrack(index, i, j, visited):
+        def backtrack(index, i, j):
             # check if index is greater than length of word
             if(index > len(word)):
                 return False
             
             # check if i, j out of range
-            if(i >= m or j >= n or i < 0 or j < 0):
+            if(i > r-1 or j > c-1 or i < 0 or j < 0):
                 return False
             
             # check if visited
@@ -59,33 +59,32 @@ class Solution():
             if(board[i][j] != word[index]):
                 return False
             
-            if(index == len(word)):
+            if(index == len(word) - 1):
                 return True
             
-            visited[i][j] = True
-            return (
-                backtrack(index + 1, i + 1, j, visited) or 
-                backtrack(index + 1, i, j + 1, visited) or 
-                backtrack(index + 1, i + 1, j + 1, visited) or 
-                backtrack(index + 1, i - 1, j, visited) or 
-                backtrack(index + 1, i, j - 1, visited) or 
-                backtrack(index + 1, i - 1, j - 1, visited) or
-                backtrack(index + 1, i + 1, j - 1, visited) or
-                backtrack(index + 1, i - 1, j + 1, visited)
-            )
             # mark as visited
+            visited[i][j] = True
             # backtrack the adjacent
+            result =  (
+                backtrack(index + 1, i + 1, j) or 
+                backtrack(index + 1, i, j + 1) or 
+                backtrack(index + 1, i - 1, j) or 
+                backtrack(index + 1, i, j - 1)
+            )
+
+            visited[i][j] = False
+            return result
             
         res = False
-        for i in range(m):
-            for j in range(n):
-                    visited = [[False]*n for i in range(m)]
-                    res = res or backtrack(0, i, j, visited)
-                    
+        
+        visited = [[False]*c for i in range(r)]
+        for i in range(r):
+            for j in range(c):
+                    res = res or backtrack(0, i, j)
                     if(res):
                         return True
-        pass
 
+        return False
 
 def app():
     global board, word
@@ -93,6 +92,6 @@ def app():
     Reader().read()
     
     solution = Solution()
-    solution.solve(board, word)
+    print(solution.solve(board, word))
 
 app()

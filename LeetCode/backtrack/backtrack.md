@@ -5,7 +5,7 @@
 ![alt text](image/idea.png)
 
 ## Procedure
-![alt text](image/procedure.png)
+![alt text](image/procedure.png)s
 
 ## Note
 ![alt text](image/note.png)
