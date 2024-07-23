@@ -28,28 +28,50 @@ class Solution():
     We'll solve problems here
     """
     def solve(self, root: Optional[TreeNode]) -> List[List[int]]:
-        dump = TreeNode()
-        dump.right = root
-        tmp = dump.right
-        while(tmp is not None):
-            tmp.left = None
-            tmp = tmp.right
+        tree_level: List[List[TreeNode]] = []
         
-        def printNode(node: Optional[TreeNode]):
-            if(node is None):
-                return
-            print(node.val)
-            printNode(node.right)
+        # append root
+        if(root is None):
+            return []
+
+        tree_level.append([root])
+
+        # travel each level and push to queue        
+        curr_level = tree_level[-1]
+        while(len(curr_level) > 0):
+            new_level: List[TreeNode] = []
+            #loop through each node in level and push their children in queue.
+            #because we visit node from left=> right => order is considered to be right.
+            for i, node in enumerate(curr_level):
+                if node.left:
+                    new_level.append(node.left)
+                if node.right:
+                    new_level.append(node.right)
+
+            #break if new level is null
+            if(len(new_level) == 0):
+                break
             
-        printNode(dump.right)
-        return dump.right
-
-
+            #else append to tree level and update current level
+            tree_level.append(new_level)
+            curr_level = tree_level[-1]
+        
+        #return res
+        def generateRes():
+            res = []
+            for node_level in tree_level:
+                node_most_right = node_level[-1]
+                if(node_most_right):
+                    res.append(node_most_right.val)
+                
+            return res
+        
+        return generateRes()
 def app():
     """Function read input, solve and output"""
     tree = Reader().read()
     
     solution = Solution()
-    solution.solve(tree)
+    print(solution.solve(tree))
 
 app()
